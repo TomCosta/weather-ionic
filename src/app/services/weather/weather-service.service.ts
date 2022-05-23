@@ -9,8 +9,13 @@ export class WeatherServiceService {
 
   }
 
-  settings(dataWeather){
-    localStorage.setItem('dataWeather', dataWeather);
+  settings(city, country){
+    let weatherObject = {
+      city: city,
+      country: country
+    }
+    console.log('weatherObject: ', weatherObject);
+    localStorage.setItem('dataWeather', JSON.stringify(weatherObject));
   }
 
   getSettings(){

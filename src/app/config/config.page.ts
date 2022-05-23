@@ -8,25 +8,27 @@ import { WeatherServiceService } from '../services/weather/weather-service.servi
 })
 export class ConfigPage implements OnInit {
 
+  city;
+  country = 'BR';
   dataWeather;
 
   constructor(
     private weatherServ: WeatherServiceService
   ){
-  }
-
-  ngOnInit() {
-    this.setConfig();
     this.getConfig();
   }
 
-  setConfig(data?) {
-    let temp = '90º'
-    this.weatherServ.settings(temp);
+  ngOnInit() {
+
+  }
+
+  setConfig() {
+    this.weatherServ.settings(this.city, this.country);
   }
 
   getConfig(){
-    this.dataWeather = this.weatherServ.getSettings();
-    console.log('Weather: ', this.dataWeather);
+    this.dataWeather = JSON.parse(this.weatherServ.getSettings());
+    this.city = this.dataWeather.city;
+    this.country = this.dataWeather.country;
   }
 }

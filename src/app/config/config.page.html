@@ -9,4 +9,23 @@
 
 <ion-content>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-item>
+          <ion-label>Cidade: </ion-label>
+          <ion-input [(ngModel)]="city"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>País: </ion-label>
+          <ion-input [(ngModel)]="country"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button fill="outline" color="success" (click)="setConfig()">
+          Salvar settings
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
