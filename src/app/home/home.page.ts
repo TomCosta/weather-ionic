@@ -11,35 +11,52 @@ export class HomePage implements OnInit, AfterViewInit {
 
   city;
   country;
+  dataWeather;
+  weatherIcon;
 
   constructor(
     private setServ: WeatherServiceService,
     private apiServ: ApiWeatherService
   ){    
+  }
+
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter: ');
     this.getSettings();
   }
 
   ngAfterViewInit(): void {
-    this.getWeather();
+    
   }
 
   ngOnInit() {
-    console.log('ngOnInit: ');
+    
   }
 
   getSettings() {
     let weather = JSON.parse(this.setServ.getSettings());
-    this.city = weather.city; 
-    this.country= weather.country;
+    if(weather) {
+      this.city = weather.city; 
+      this.country = weather.country;
+      this.getWeather(this.city, this.country);
+    }
   }
 
-  getWeather() {
-    try {
-      this.apiServ.getWeather(this.city, this.country).subscribe((resp)=>{
+  getWeather(city, country) {
+    try {      
+      this.apiServ.getWeather(city, country).subscribe((resp)=>{
         console.log('Weather: ', resp);
+        this.weatherIcon = 'http://openweathermap.org/img/w/' + resp['weather'][0].icon + '.png';
+        this.dataWeather = resp;
       });
     } catch (error) {
       console.log('Erro: ', error);
     }
+  }
+
+  ionViewDidLeave(){
+    this.city = ''; 
+    this.country = '';
+    console.log('OnDestroy: ', this.city, this.country);
   }
 }

@@ -28,7 +28,9 @@ export class ConfigPage implements OnInit {
 
   getConfig(){
     this.dataWeather = JSON.parse(this.weatherServ.getSettings());
-    this.city = this.dataWeather.city;
-    this.country = this.dataWeather.country;
+    if(this.dataWeather){
+      this.city = this.dataWeather.city;
+      this.country = this.dataWeather.country;
+    }
   }
 }

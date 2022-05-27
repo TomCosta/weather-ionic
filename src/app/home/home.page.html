@@ -9,6 +9,15 @@
 
 <ion-content>
 
-  
+<ion-grid>
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <img *ngIf="weatherIcon" class="imgSize" src="{{weatherIcon}}" />
+      <h2> {{ dataWeather?.name }} </h2>
+      <p>Temperatura:  <span>{{ dataWeather?.main?.temp }}</span></p>
+      <p>Descrição:  <span class="ion-capitalize">{{ dataWeather?.weather[0]?.description }}</span></p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 </ion-content>
