@@ -18,6 +18,46 @@
       <p>Descrição:  <span class="ion-capitalize">{{ dataWeather?.weather[0]?.description }}</span></p>
     </ion-col>
   </ion-row>
+  <br>
+  <ion-row>
+    <ion-col>
+    <!-- Segment with secondary color -->
+    <ion-segment mode="ios" value="hum" (ionChange)="segmentChanged($event)" color="secondary">
+      <ion-segment-button value="hum" class="segButton">
+        <ion-icon name="water-outline"></ion-icon>
+        <ion-label>Humidade</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="min" class="segButton">
+        <ion-icon name="remove-circle-outline"></ion-icon>
+        <ion-label>Temp. Min.</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="max" class="segButton">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-label>Temp. Max.</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <br>
+    <br>
+    <ion-item *ngIf="segmentStatus==='hum'" lines="none">
+      <ion-col class="ion-text-center">
+        <p>Humidade</p>
+        <h2> {{ dataWeather?.main?.humidity }} </h2>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="segmentStatus==='min'" lines="none">
+      <ion-col class="ion-text-center">
+        <p>Temperatura Mínima</p>
+        <h2> {{ dataWeather?.main?.temp_min }} </h2>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="segmentStatus==='max'" lines="none">
+      <ion-col class="ion-text-center">
+        <p>Temperatura Máxima</p>
+        <h2> {{ dataWeather?.main?.temp_max }} </h2>
+      </ion-col>
+    </ion-item>
+    </ion-col>
+  </ion-row>
 </ion-grid>
 
 </ion-content>

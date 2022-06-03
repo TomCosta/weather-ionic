@@ -13,6 +13,7 @@ export class HomePage implements OnInit, AfterViewInit {
   country;
   dataWeather;
   weatherIcon;
+  segmentStatus: string = 'min';
 
   constructor(
     private setServ: WeatherServiceService,
@@ -54,9 +55,12 @@ export class HomePage implements OnInit, AfterViewInit {
     }
   }
 
-  ionViewDidLeave(){
-    this.city = ''; 
+  segmentChanged(event) {
+    this.segmentStatus = event.detail.value;
+  }
+
+  ionViewDidLeave() {
+    this.city = '';
     this.country = '';
-    console.log('OnDestroy: ', this.city, this.country);
   }
 }
