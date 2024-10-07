@@ -1,0 +1,26 @@
+ion-item.item-input {
+    color: #008000;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    --inner-border-width: 0px;
+}
+
+.resValue {
+    font-size: 70px;
+    text-align: center;
+    font-weight: normal;
+}
+
+ion-list {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    background: #2dd36f;
+}
+
+ion-button {
+    color: #008000;
+}
