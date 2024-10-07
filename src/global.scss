@@ -24,3 +24,14 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.fundao {
+    margin-top: 20px;
+    --background: linear-gradient(197deg, #ffffef 0%, #ffff80 13.5%, #ffff60 33.33%, #008000 100%);
+}
+
+ion-toast.custom-toast::part(message) {
+    text-align: center;
+    font-size: 20px;
+}

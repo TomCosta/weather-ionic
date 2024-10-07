@@ -1,63 +1,69 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="false">
+  <ion-toolbar mode="ios" color="success">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button></ion-menu-button>          
     </ion-buttons>
-    <ion-title>Home</ion-title>
+    <ion-title> {{ title }} </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="home" [ngClass]="(clima == 'tempo nublado' || clima == 'nuvens quebrados') ? 'nublado' : 'bom'" class="ion-padding">
 
-<ion-grid>
-  <ion-row>
-    <ion-col class="ion-text-center">
-      <img *ngIf="weatherIcon" class="imgSize" src="{{weatherIcon}}" />
-      <h2> {{ dataWeather?.name }} </h2>
-      <p>Temperatura:  <span>{{ dataWeather?.main?.temp }}</span></p>
-      <p>Descrição:  <span class="ion-capitalize">{{ dataWeather?.weather[0]?.description }}</span></p>
-    </ion-col>
-  </ion-row>
-  <br>
-  <ion-row>
-    <ion-col>
-    <!-- Segment with secondary color -->
-    <ion-segment mode="ios" value="hum" (ionChange)="segmentChanged($event)" color="secondary">
-      <ion-segment-button value="hum" class="segButton">
+  <ion-grid *ngIf="dataWeather">
+    <ion-row>
+      <ion-col>
+        <h2 class="location">{{dataWeather.name}}</h2>
+        <div *ngIf="weatherIcon" class="icon"><img src="{{weatherIcon}}" alt="clima"></div>
+        <h5 class="ion-text-capitalize desc">{{dataWeather.weather[0].description}}</h5>
+        <h1 class="temp">{{dataWeather.main.temp}}&deg;</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-segment mode="ios" scrollable="true" type="button" [(ngModel)]="mySeg" name="mySeg" (ionChange)="segmentChanged(mySeg)" class="segCor">
+      <ion-segment-button value="hum" class="segCor segCor2">
         <ion-icon name="water-outline"></ion-icon>
-        <ion-label>Humidade</ion-label>
+        <ion-label>Humidade</ion-label>        
       </ion-segment-button>
-      <ion-segment-button value="min" class="segButton">
+      <ion-segment-button value="min" class="segCor segCor2">
         <ion-icon name="remove-circle-outline"></ion-icon>
-        <ion-label>Temp. Min.</ion-label>
+        <ion-label>Temp. Min.</ion-label>        
       </ion-segment-button>
-      <ion-segment-button value="max" class="segButton">
+      <ion-segment-button value="max" class="segCor segCor2">
         <ion-icon name="add-circle-outline"></ion-icon>
         <ion-label>Temp. Max.</ion-label>
       </ion-segment-button>
     </ion-segment>
-    <br>
-    <br>
-    <ion-item *ngIf="segmentStatus==='hum'" lines="none">
-      <ion-col class="ion-text-center">
-        <p>Humidade</p>
-        <h2> {{ dataWeather?.main?.humidity }} </h2>
-      </ion-col>
-    </ion-item>
-    <ion-item *ngIf="segmentStatus==='min'" lines="none">
-      <ion-col class="ion-text-center">
-        <p>Temperatura Mínima</p>
-        <h2> {{ dataWeather?.main?.temp_min }} </h2>
-      </ion-col>
-    </ion-item>
-    <ion-item *ngIf="segmentStatus==='max'" lines="none">
-      <ion-col class="ion-text-center">
-        <p>Temperatura Máxima</p>
-        <h2> {{ dataWeather?.main?.temp_max }} </h2>
-      </ion-col>
-    </ion-item>
-    </ion-col>
-  </ion-row>
-</ion-grid>
 
+    <div [ngSwitch]="mySeg">
+
+    <ion-grid *ngSwitchCase="'hum'">
+      <ion-row class="ion-text-center ion-padding-top">
+        <ion-col>
+          <span class="resValue"> {{dataWeather.main.humidity}}%</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngSwitchCase="'min'">
+      <ion-row class="ion-text-center ion-padding-top">
+        <ion-col>
+          <span class="resValue"> {{dataWeather.main.temp_min}}&deg;</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngSwitchCase="'max'">
+      <ion-row class="ion-text-center ion-padding-top">
+        <ion-col>
+          <span class="resValue"> {{dataWeather.main.temp_max}}&deg;</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    </div>
+  </ion-grid>
+
+  <div *ngIf="!dataWeather" class="home desc ion-padding">
+    <p><strong> Certifique-se de que há conexão com a internet, ou digite novamente a cidade. </strong></p>
+  </div>
 </ion-content>

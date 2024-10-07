@@ -13,7 +13,7 @@ import { ConfigPage } from './config.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ConfigPageRoutingModule
+    ConfigPageRoutingModule    
   ],
   declarations: [ConfigPage]
 })
