@@ -1,5 +1,5 @@
-.div-bg {
-    background-color: darkgreen;
+.local-bg {
+    --background: darkgreen;
 }
 
 .txtWhite {
@@ -8,4 +8,8 @@
 
 .font20 {
     font-size: 20px;
+}
+
+.font12 {
+    font-size: 12px;
 }
